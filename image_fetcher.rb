@@ -22,13 +22,8 @@ class ImageFetcher
 
   # fetch only the images that begin with `http://i.imgur.com`
   def only_imgur_images
-    imgur_images = []
-    @data["data"]["children"].each do |child|
-      if child["data"]["url"].match /http:\/\/i.i/
-        imgur_images << child["data"]["url"]
-        @data.delete_if {|k, v| v.nil?}
-      end
+    all_images.select do |image|
+      /http:\/\/i.i/ === image
     end
-    imgur_images
   end
 end
